@@ -11,6 +11,7 @@ class BotInfo(BaseModel):
     users_empty: int
     groups_live: int
     groups_die: int
+    users_in_groups: int
     arabic: Optional[str]
     male: Optional[str]
     female: Optional[str]
