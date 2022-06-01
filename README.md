@@ -4,7 +4,14 @@ Mini library for [BotStat API](api.botstat.io).
 
 Current API version: 0.1
 
-Install: `pip install aiobotstat`
+Install
+
+ - Git: `pip install git+https://github.com/viuipan/aiobotstat.git`
+ 
+
+ - PyPi: `pip install aiobotstat`
+
+
 
 Example:
 ```
