@@ -10,5 +10,5 @@ setup(
     long_description=open('README.md').read(),
     long_description_content_type="text/markdown",
     packages=['aiobotstat', 'aiobotstat.models'],
-    setup_requires=['aiohttp', 'pydantic', 'certifi', 'ujson']
+    install_requires=['aiohttp', 'pydantic', 'certifi', 'ujson']
 )
