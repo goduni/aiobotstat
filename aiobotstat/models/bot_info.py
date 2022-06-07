@@ -1,6 +1,7 @@
 from typing import Optional
+from datetime import datetime
 
-from pydantic import BaseModel
+from pydantic import BaseModel, validator
 
 
 class BotInfo(BaseModel):
@@ -15,4 +16,8 @@ class BotInfo(BaseModel):
     arabic: Optional[str]
     male: Optional[str]
     female: Optional[str]
-    date: Optional[str]
+    date: Optional[datetime]
+
+    @validator('date', pre=True)
+    def convert_date(date: str):
+        return datetime.fromisoformat(date.replace(',' , ''))
