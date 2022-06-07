@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='aiobotstat',
-    version='0.1.1',
+    version='0.1.2',
     url='https://github.com/viuipan/aiobotstat',
     author_email='viuipan@gmail.com',
     license='MIT',
