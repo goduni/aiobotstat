@@ -14,7 +14,7 @@ Install
 
 
 Example:
-```
+``` python
 import asyncio
 
 from aiobotstat import BotStatAPI
