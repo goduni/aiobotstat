@@ -26,8 +26,13 @@ class BotStatAPI(BaseClient):
         :param username: Bot id or username (case-insensitive)
         :return: bot profile object or not found exception
         """
+        if self.__access_key is None:
+            raise RuntimeError(
+                "Please provide `access_key` for `BotStatAPI` instance "
+                "You can get the access key at https://botstat.io/dashboard/api"
+            )
         method = HTTPMethods.GET
-        url = f"{self.BASE_URL}/get/{username}"
+        url = f"{self.BASE_URL}/get/{username}/{self.__access_key}"
 
         data = await self._make_request(method, url)
         return BotInfo(**data.result)
@@ -52,8 +57,13 @@ class BotStatAPI(BaseClient):
                 "Please provide `token` for `BotStatAPI` instance "
                 "or pass it as a `create_task` request param."
             )
+        if self.__access_key is None:
+            raise RuntimeError(
+                "Please provide `access_key` for `BotStatAPI` instance "
+                "You can get the access key at https://botstat.io/dashboard/api"
+            )
         method = HTTPMethods.POST
-        url = f"{self.BASE_URL}/create/{token}"
+        url = f"{self.BASE_URL}/create/{token}/{self.__access_key}"
         form = self._prepare_form(file)
 
         params = {}
