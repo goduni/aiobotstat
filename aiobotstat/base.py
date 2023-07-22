@@ -79,7 +79,6 @@ class BaseClient:
 
         if status != 200 or (status == 200 and response.ok is False):
             raise self._process_exception(data)
-
         return response
 
     def _prepare_form(self, file: Union[str, Path, io.IOBase]) -> FormData:

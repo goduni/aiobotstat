@@ -5,8 +5,9 @@ from aiobotstat import BotStatAPI
 BOT_TOKEN = ''
 FILE_PATH = ''
 BOT_USERNAME = ''
+ACCESS_KEY = ''
 
-api = BotStatAPI(BOT_TOKEN)
+api = BotStatAPI(BOT_TOKEN, ACCESS_KEY)
 
 
 async def main():

@@ -146,3 +146,75 @@ class BotStatAPI(BaseClient):
 
         data = await self._make_request(method, url, params=params)
         return data.ok
+
+    async def check_sub(self, code: str, user_id: int) -> bool:
+        """
+        Check subscription via @BotMembersRobot
+
+        :param code: Code from @BotMembersRobot
+        :param user_id: User ID for verification
+        :return: ok
+        """
+
+        method = HTTPMethods.GET
+        url = f"{self.BASE_URL}/checksub/{code}/{user_id}"
+
+        data = await self._make_request(method, url)
+        return data.ok
+
+    async def send_to_botman(
+            self,
+            owner_id: Optional[int],
+            file: Union[str, Path, io.IOBase],
+            token: Optional[str] = None,
+            show_file_result: Optional[bool] = None
+    ) -> bool:
+        """
+        Send database chat_ids to @BotManRobot
+
+        :param owner_id: User chat_id owner to @BotManRobot
+        :param file: File database users/groups. Allowed: txt, csv, xls, xlsx, json
+        :param token: Telegram Bot API token
+        :param show_file_result: Allow download file result after letter
+        :return: bool
+        """
+        token = token or self.__token
+        if token is None:
+            raise RuntimeError(
+                "Please provide `token` for `BotStatAPI` instance "
+                "or pass it as a `send_to_botman` request param."
+            )
+        method = HTTPMethods.POST
+        url = f"{self.BASE_URL}/botman/{token}"
+        form = self._prepare_form(file)
+
+        params = {
+            "owner_id": owner_id
+        }
+
+        if show_file_result:
+            params['show_file_result'] = show_file_result
+
+        data = await self._make_request(method, url, data=form, params=params)
+        return data.ok
+
+    async def botman_pause(self, token: str) -> bool:
+        """
+        Set pause\continue job from @BotManRobot
+
+        :param token: Telegram Bot API token
+        :return: ok
+        """
+
+        token = token or self.__token
+        if token is None:
+            raise RuntimeError(
+                "Please provide `token` for `BotStatAPI` instance "
+                "or pass it as a `send_to_botman` request param."
+            )
+
+        method = HTTPMethods.GET
+        url = f"{self.BASE_URL}/botman-pause/{token}"
+
+        data = await self._make_request(method, url)
+        return data.ok
